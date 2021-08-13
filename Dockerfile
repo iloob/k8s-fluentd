@@ -1,5 +1,4 @@
 FROM  fluent/fluentd:v1.10
-MAINTAINER Mattias Hemmingsson mattias.hemmingsson@booli.se
 
 USER root
 RUN apk add --no-cache --update --virtual .build-deps \
@@ -22,6 +21,8 @@ RUN fluent-gem install fluent-plugin-elasticsearch \
         fluent-plugin-rewrite-tag-filter \
  && sudo gem install \
         fluent-plugin-prometheus \
+ && sudo gem install \
+        fluent-plugin-s3 \        
  && sudo gem sources --clear-all \
  && apk del .build-deps \
  && rm -rf /home/fluent/.gem/ruby/2.3.0/cache/*.gem
